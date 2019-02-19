@@ -48,7 +48,7 @@ app.use(routes);
 
 
 
-
-app.listen(process.env.PORT || 8080, () => {
+let port = process.env.PORT || 8080;
+app.listen(port, () => {
     console.log('Server is up and running on port numner ' + port);
 });
