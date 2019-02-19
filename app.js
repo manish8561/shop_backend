@@ -53,7 +53,7 @@ app.use(routes);
 
 
 
-let port = 1234;
+let port = 8080;
 
 app.listen(port, () => {
     console.log('Server is up and running on port numner ' + port);

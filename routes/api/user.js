@@ -7,4 +7,7 @@ const user = require('../../controllers/user');
 
 // a simple test url to check that all of our files are communicating correctly.
 router.get('/test', user.test);
+router.get('/user/get', user.getAll);
+router.post('/user/add', user.add);
+
 module.exports = router;

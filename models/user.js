@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
     name: { type: String, required: true, max: 100 },
-    email: { type: String, required: true, unique:true },
-    password: { type: String, default:null },
-    price: { type: Number, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, default: null },
+    balance: { type: Number, required: true, default: 0 },
     status: { type: String, default: 'active' },
-    ip: { type: String, default: '0.0.0.0' }
+    ip: { type: String, default: '0.0.0.0' },
+    phone: { type: String }
 }, { timestamps: true });
 
 
