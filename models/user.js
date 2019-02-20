@@ -21,6 +21,7 @@ let UserSchema = new Schema(
 
 UserSchema.methods.validPassword = function(password) {
   var hash = encodeMD5(password);
+  console.log(hash, password, this.password);
   return this.password === hash;
 };
 
