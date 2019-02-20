@@ -7,6 +7,8 @@ const http = require('http'),
     passport = require('passport'),
     errorhandler = require('errorhandler'),
     mongoose = require('mongoose');
+/* custom setting with passport common for whole project */
+require('./config/passport');
 
 let isProduction = process.env.NODE_ENV === 'production';
 // initialize our express app
@@ -28,7 +30,7 @@ const config = require('./config/config');
 
 
 if (isProduction) {
-    mongoose.connect(process.env.MONGODB_URI);
+    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 } else {
     // mongoose.connect('mongodb://54.173.35.192/asteriskcdrdb',{ useNewUrlParser: true});
     mongoose.connect(config.url, { useNewUrlParser: true });
@@ -37,9 +39,6 @@ if (isProduction) {
 mongoose.set('useCreateIndex', true);
 mongoose.set('debug', true);
 const routes = require('./routes');
-
-
-
 
 app.use(routes);
 
