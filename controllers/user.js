@@ -34,7 +34,7 @@ user.add = (req, res, next) => {
       if (!data) {
         return res.status(422);
       }
-      return res.json({ user: data });
+      return res.json({ user: data,token: user.generateJWT()  });
     });
   }
 };

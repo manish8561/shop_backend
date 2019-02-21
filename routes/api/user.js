@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var auth = require('../auth');
+const auth = require('../auth');
 // Require the controllers WHICH WE DID NOT CREATE YET!!
 const user = require('../../controllers/user');
 
