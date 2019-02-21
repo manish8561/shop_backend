@@ -14,7 +14,8 @@ let UserSchema = new Schema(
     balance: { type: Number, required: true, default: 0 },
     status: { type: String, default: "active" },
     ip: { type: String, default: "0.0.0.0" },
-    phone: { type: String }
+    phone: { type: String },
+    role:{type:String,default:'customer'}
   },
   { timestamps: true }
 );
