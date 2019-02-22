@@ -29,6 +29,7 @@ order.add = (req, res, next) => {
     let order = new Order();
     order.amazon_order_id = req.body.amazon_order_id;
     order.phone = req.body.phone;
+    order.order_details = req.body.order_details;
     order.orderBy = req.body.orderBy;
 
     order.save((err, data) => {
