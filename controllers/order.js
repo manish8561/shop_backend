@@ -4,7 +4,7 @@ const Order = require("../models/order");
 let order = {};
 
 order.getAll = (req, res, next) => {
-  Order.find()
+  Order.find().populate('orderBy')
     .then(data => {
       if (!data) {
         return res.status(422);
