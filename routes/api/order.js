@@ -6,6 +6,8 @@ const order = require("../../controllers/order");
 
 // a simple test url to check that all of our files are communicating correctly.
 router.get("/get", order.getAll);
+router.get("/get/:id", order.get);
+router.get("/sendEmail/:id", order.sendEmail);
 router.post("/add", order.add);
 router.put("/update/:id", order.update);
 router.delete("/delete/:id", order.deleteOrder);

@@ -75,12 +75,38 @@ user.update = (req, res, next) => {
       new: false,
       overwrite: false
     };
+    if(req.body.password){
+      update.password = encodeMD5(req.body.password);
+    }
+
   User.findByIdAndUpdate(req.params.id, update, options)
     .then(data => {
       return res.json({ user: data });
     })
     .catch(next);
 };
+
+user.updatePassword = (req, res, next) => {
+  let /*  query = {
+          _id: req.params.id
+      }, */
+    update = {},
+    options = {
+      upsert: false,
+      new: false,
+      overwrite: false
+    };
+    if(req.body.password){
+      update.password = encodeMD5(req.body.password);
+    }
+
+  User.findByIdAndUpdate(req.params.id, update, options)
+    .then(data => {
+      return res.json({ user: data });
+    })
+    .catch(next);
+};
+
 
 user.deleteUser = (req, res, next) => {
   User.findByIdAndRemove(req.params.id)

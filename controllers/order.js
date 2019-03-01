@@ -13,6 +13,20 @@ order.getAll = (req, res, next) => {
     })
     .catch(next);
 };
+order.get = (req, res, next) => {
+  let id = ''
+  if(req.params.id){
+     id=req.params.id;
+  }
+  Order.findById(id).populate('orderBy')
+    .then(data => {
+      if (!data) {
+        return res.status(422);
+      }
+      return res.json({ order: data });
+    })
+    .catch(next);
+};
 order.userOrders = (req, res, next) => {
     Order.find({orderBy:req.params.user})
       .then(data => {
@@ -45,13 +59,11 @@ order.add = (req, res, next) => {
 };
 
 order.update = (req, res, next) => {
-  let /*  query = {
-          _id: req.params.id
-      }, */
-    update = {
+  let update = {
       amount: req.body.amount,
       status: req.body.status,
-      remark: req.body.remark
+      remark: req.body.remark,
+      order_details: req.body.order_details
     },
     options = {
       upsert: false,
@@ -70,6 +82,15 @@ order.update = (req, res, next) => {
     .catch(next);
 };
 
+order.sendEmail = (req, res, next) => {
+ 
+  Order.findById(req.params.id).populate('orderBy')
+    .then(data => {
+      console.log('send email');
+      return res.json({ order: data });
+    })
+    .catch(next);
+};
 order.deleteOrder = (req, res, next) => {
   Order.findByIdAndRemove(req.params.id)
     .then(data => {
