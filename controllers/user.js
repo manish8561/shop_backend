@@ -19,6 +19,16 @@ user.getAll = (req, res, next) => {
     })
     .catch(next);
 };
+user.get = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(data => {
+      if (!data) {
+        return res.status(422);
+      }
+      return res.json({ user: data });
+    })
+    .catch(next);
+};
 /* adding the user */
 user.add = (req, res, next) => {
   if (req.body) {
