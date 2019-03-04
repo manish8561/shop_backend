@@ -1,4 +1,7 @@
 const Order = require("../models/order");
+const { sendingEmail } = require("../utilities");
+
+// var hbs = require('nodemailer-express-handlebars');
 
 //Simple version, without validation or sanitation
 let order = {};
@@ -87,6 +90,34 @@ order.sendEmail = (req, res, next) => {
   Order.findById(req.params.id).populate('orderBy')
     .then(data => {
       console.log('send email');
+      let emaildata = {to : 'geeksem83@gmail.com'}; 
+      emaildata.html = `<div class="">
+      <div id=":mr" tabindex="-1"></div>
+      <div id=":n2" class="ii gt">
+      <h3>Dear Valued Client</h3>
+      We have send the your order cashback to the your specifed paytm number!<br>
+      <br>
+      `+data.orderBy.email+`
+      <br>
+      If you still find issue related to your payment, Please contact us. <br>
+      <br>     
+      <br>
+      Thanks for ordering from our website ! <br>
+      <p>With Regards,</p>
+      Team Buy2Cash
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        
+      <br>
+      </div></div></div></div>`;
+
+      sendingEmail(emaildata);
+
       return res.json({ order: data });
     })
     .catch(next);
