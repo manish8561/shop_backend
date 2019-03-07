@@ -89,8 +89,7 @@ order.sendEmail = (req, res, next) => {
  
   Order.findById(req.params.id).populate('orderBy')
     .then(data => {
-      console.log('send email');
-      let emaildata = {to : 'geeksem83@gmail.com'}; 
+      let emaildata = {to : data.orderBy.email}; 
       emaildata.html = `<div class="">
       <div id=":mr" tabindex="-1"></div>
       <div id=":n2" class="ii gt">
