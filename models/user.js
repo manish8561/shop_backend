@@ -15,27 +15,27 @@ let UserSchema = new Schema(
     status: { type: String, default: "active" },
     ip: { type: String, default: "0.0.0.0" },
     phone: { type: String },
-    role:{type:String,default:'customer'}
+    role: { type: String, default: 'customer' }
   },
   { timestamps: true }
 );
 
-UserSchema.methods.validPassword = function(password) {
+UserSchema.methods.validPassword = function (password) {
   var hash = encodeMD5(password);
-  console.log(hash, password, this.password);
+  // console.log(hash, password, this.password);
   return this.password === hash;
 };
 
-UserSchema.methods.generateJWT = function() {
-  var today = new Date();
+UserSchema.methods.generateJWT = function () {
+  /* var today = new Date();
   var exp = new Date(today);
-  exp.setDate(today.getDate() + 7);
+  exp.setDate(today.getDate() + 7); */
 
   return jwt.sign(
     {
       id: this._id,
       email: this.email,
-      exp: parseInt(exp.getTime() / 1000)
+      exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60)
     },
     secret
   );
